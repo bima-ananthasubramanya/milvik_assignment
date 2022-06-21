@@ -40,285 +40,287 @@ class _DoctorProfileState extends State<DoctorProfile> {
         centerTitle: true,
       ),
       body: SafeArea(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  widget.firstName! + widget.lastName!,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
+        child: SingleChildScrollView(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    widget.firstName! + widget.lastName!,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  // width: double.infinity,
-                  // padding: EdgeInsets.all(value),
-                  // decoration:
-                  //     BoxDecoration(borderRadius: BorderRadius.circular(30)),
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(7),
-                            // side: BorderSide(color: Colors.yellow),
+                  SizedBox(
+                    // width: double.infinity,
+                    // padding: EdgeInsets.all(value),
+                    // decoration:
+                    //     BoxDecoration(borderRadius: BorderRadius.circular(30)),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(7),
+                              // side: BorderSide(color: Colors.yellow),
+                            ),
                           ),
-                        ),
-                        backgroundColor: MaterialStateProperty.all(Colors.teal),
-                        padding: MaterialStateProperty.all(EdgeInsets.all(10))),
-                    onPressed: () {},
-                    child: Text(
-                      'Edit Profile',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
+                          backgroundColor: MaterialStateProperty.all(Colors.teal),
+                          padding: MaterialStateProperty.all(EdgeInsets.all(10))),
+                      onPressed: () {},
+                      child: Text(
+                        'Edit Profile',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
 
-                        // fontFamily: 'RobotoCondensed'
+                          // fontFamily: 'RobotoCondensed'
+                        ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  // color: Colors.lightBlue,
-                  height: 550,
-                  width: double.infinity,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    // crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'PERSONAL DETAILS',
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Roboto'),
-                      ),
-                      Card(
-                        color: Colors.white,
-                        child: ListTile(
-                          title: Text(
-                            'First Name'.toUpperCase(),
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          subtitle: Text(
-                            widget.firstName!,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontSize: 18),
+                  SizedBox(
+                    // color: Colors.lightBlue,
+                    height: 550,
+                    width: double.infinity,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      // crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'PERSONAL DETAILS',
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Roboto'),
+                        ),
+                        Card(
+                          color: Colors.white,
+                          child: ListTile(
+                            title: Text(
+                              'First Name'.toUpperCase(),
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                            subtitle: Text(
+                              widget.firstName!,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontSize: 18),
+                            ),
                           ),
                         ),
-                      ),
-                      Card(
-                        color: Colors.white,
-                        child: ListTile(
-                          title: Text(
-                            'Last Name'.toUpperCase(),
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          subtitle: Text(
-                            widget.lastName!,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontSize: 18),
-                          ),
-                        ),
-                      ),
-                      Card(
-                        color: Colors.white,
-                        child: ListTile(
-                          title: Text(
-                            'Gender'.toUpperCase(),
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          subtitle: Text(
-                            'M/F',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontSize: 18),
+                        Card(
+                          color: Colors.white,
+                          child: ListTile(
+                            title: Text(
+                              'Last Name'.toUpperCase(),
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                            subtitle: Text(
+                              widget.lastName!,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontSize: 18),
+                            ),
                           ),
                         ),
-                      ),
-                      Card(
-                        color: Colors.white,
-                        child: ListTile(
-                          title: Text(
-                            'Contact Number'.toUpperCase(),
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          subtitle: Text(
-                            widget.contactNumber!,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontSize: 18),
+                        Card(
+                          color: Colors.white,
+                          child: ListTile(
+                            title: Text(
+                              'Gender'.toUpperCase(),
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                            subtitle: Text(
+                              'M/F',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontSize: 18),
+                            ),
                           ),
                         ),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        height: 200,
-                        // color: Colors.pink,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.symmetric(horizontal: 10),
-                              child: Text(
-                                'Date of Birth'.toUpperCase(),
-                                style: TextStyle(color: Colors.grey),
+                        Card(
+                          color: Colors.white,
+                          child: ListTile(
+                            title: Text(
+                              'Contact Number'.toUpperCase(),
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                            subtitle: Text(
+                              widget.contactNumber!,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontSize: 18),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 200,
+                          // color: Colors.pink,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.symmetric(horizontal: 10),
+                                child: Text(
+                                  'Date of Birth'.toUpperCase(),
+                                  style: TextStyle(color: Colors.grey),
+                                ),
                               ),
-                            ),
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: Colors.black,
-                                    ),
-                                  )
-                                  // margin: EdgeInsets.all(10),
-                                  ,
-                                  // color: Colors.white,
-                                  height: 80,
-                                  width: 90,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text('Day'),
-                                      Text(
-                                        'day',
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: Colors.black,
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.black,
+                                      ),
+                                    )
+                                    // margin: EdgeInsets.all(10),
+                                    ,
+                                    // color: Colors.white,
+                                    height: 80,
+                                    width: 90,
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text('Day'),
+                                        Text(
+                                          'day',
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold),
+                                        )
+                                      ],
                                     ),
                                   ),
-                                  // margin: EdgeInsets.all(10),
-                                  // color: Colors.white,
-                                  height: 80,
-                                  width: 90,
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    // margin: EdgeInsets.all(10),
+                                    // color: Colors.white,
+                                    height: 80,
+                                    width: 90,
 
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text('Month'),
-                                      Text(
-                                        'month',
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: Colors.black,
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text('Month'),
+                                        Text(
+                                          'month',
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold),
+                                        )
+                                      ],
                                     ),
                                   ),
-                                  // margin: EdgeInsets.all(10)
-                                  // color: Colors.white,
-                                  height: 80,
-                                  width: 90,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text('Year'),
-                                      Text(
-                                        'year',
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: Colors.black,
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    // margin: EdgeInsets.all(10)
+                                    // color: Colors.white,
+                                    height: 80,
+                                    width: 90,
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text('Year'),
+                                        Text(
+                                          'year',
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold),
+                                        )
+                                      ],
                                     ),
                                   ),
-                                  // margin: EdgeInsets.all(10),
-                                  // color: Colors.white,
-                                  height: 80,
-                                  width: 90,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text('Blood Group'.toUpperCase()),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: Colors.black,
+                                ],
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    // margin: EdgeInsets.all(10),
+                                    // color: Colors.white,
+                                    height: 80,
+                                    width: 90,
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text('Blood Group'.toUpperCase()),
+                                      ],
                                     ),
                                   ),
-                                  // margin: EdgeInsets.all(10),
-                                  // color: Colors.white,
-                                  height: 80,
-                                  width: 90,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text('Height'.toUpperCase()),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: Colors.black,
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    // margin: EdgeInsets.all(10),
+                                    // color: Colors.white,
+                                    height: 80,
+                                    width: 90,
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text('Height'.toUpperCase()),
+                                      ],
                                     ),
                                   ),
-                                  // margin: EdgeInsets.all(10),
-                                  // color: Colors.white,
-                                  height: 80,
-                                  width: 90,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text('Weight'.toUpperCase()),
-                                    ],
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    // margin: EdgeInsets.all(10),
+                                    // color: Colors.white,
+                                    height: 80,
+                                    width: 90,
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text('Weight'.toUpperCase()),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                )
-              ],
+                                ],
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),

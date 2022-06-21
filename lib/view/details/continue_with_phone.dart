@@ -10,6 +10,8 @@ class ContinueWithPhone extends StatefulWidget {
 
 class _ContinueWithPhoneState extends State<ContinueWithPhone> {
   var phoneNumberController = TextEditingController();
+  String phoneNumber = '9986975481';
+
 
   // void submitData() {
   //   final enteredPhoneNumber = phoneNumberController.text;
@@ -89,14 +91,19 @@ class _ContinueWithPhoneState extends State<ContinueWithPhone> {
                     backgroundColor: MaterialStateProperty.all(Colors.teal),
                     padding: MaterialStateProperty.all(EdgeInsets.all(10))),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => VerifyPhone(
-                        phoneNumber: phoneNumberController.text,
+                  if(phoneNumberController.text == phoneNumber) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            VerifyPhone(
+                              phoneNumber: phoneNumberController.text,
+                            ),
                       ),
-                    ),
-                  );
+                    );
+                  } else {
+                    print('Enter a valid phone Number');
+                  }
                 },
                 child: Text(
                   'Continue',

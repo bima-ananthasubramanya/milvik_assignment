@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:milvik_project/widgets/splash.dart';
+
 import 'view/details/continue_with_phone.dart';
 
 Future<void> main() async {
@@ -17,6 +19,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           scaffoldBackgroundColor: Colors.lightBlue.shade900,
         ),
-        home: ContinueWithPhone());
+        home: Splash());
   }
 }

@@ -16,6 +16,8 @@ class VerifyPhone extends StatefulWidget {
 }
 
 class _VerifyPhoneState extends State<VerifyPhone> {
+  var otpController = TextEditingController();
+  String otp = '123456';
   String code = '';
   bool _value = false;
 
@@ -83,13 +85,15 @@ class _VerifyPhoneState extends State<VerifyPhone> {
                       backgroundColor: MaterialStateProperty.all(Colors.teal),
                       padding: MaterialStateProperty.all(EdgeInsets.all(10))),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomeScreen(),
-                      ),
-                    );
-                  },
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HomeScreen(),
+                        ),
+                      );
+                    } ,
+
                   child: Text(
                     'Login',
                     style: TextStyle(
@@ -101,20 +105,20 @@ class _VerifyPhoneState extends State<VerifyPhone> {
                   ),
                 ),
               ),
-              CheckboxListTile(
-                  title: Text(
-                    'I agree to the Terms of Use and Privacy Policy',
-                    style: TextStyle(color: Colors.white, fontSize: 15),
-                  ),
-                  controlAffinity: ListTileControlAffinity.leading,
-                  activeColor: Colors.teal,
-                  checkColor: Colors.white,
-                  value: _value,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      _value = value!;
-                    });
-                  })
+              // CheckboxListTile(
+              //     title: Text(
+              //       'I agree to the Terms of Use and Privacy Policy',
+              //       style: TextStyle(color: Colors.white, fontSize: 15),
+              //     ),
+              //     controlAffinity: ListTileControlAffinity.leading,
+              //     activeColor: Colors.teal,
+              //     checkColor: Colors.white,
+              //     value: _value,
+              //     onChanged: (bool? value) {
+              //       setState(() {
+              //         _value = value!;
+              //       });
+              //     })
             ],
           ),
         ),
@@ -134,10 +138,11 @@ class _VerifyPhoneState extends State<VerifyPhone> {
             if (value.length == 1 && last == false) {
               FocusScope.of(context).nextFocus();
             }
-            if (value.length == 0 && first == false) {
+            if (value.isEmpty && first == false) {
               FocusScope.of(context).previousFocus();
             }
           },
+
           showCursor: false,
           readOnly: false,
           textAlign: TextAlign.center,
