@@ -1,10 +1,17 @@
 
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../view/details/continue_with_phone.dart';
+import '../view/home_screen/home_screen_doctor_list.dart';
 
-class Splash extends StatefulWidget {
+class Splash extends StatefulWidget  {
+
+
+
   const Splash({Key? key}) : super(key: key);
 
   @override
@@ -14,7 +21,8 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> {
   void initState(){
     super.initState();
-    navigateToLogin();
+    startTimer();
+
   }
 
 
@@ -24,14 +32,23 @@ class _SplashState extends State<Splash> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Center(
-          child: Image.asset('/Users/milvik/StudioProjects/milvik_assignment/images/img_bima_logo_nav_blue_56dp.png'),
+          child: Image.asset('images/img_bima_logo_nav_blue_56dp.png'),
         ),
       ),
     );
   }
 
-  void navigateToLogin() async{
-    await Future.delayed(Duration(milliseconds: 3000), () {});
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ContinueWithPhone()));
+  void navigateUser() async{
+    WidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var phoneNumber = prefs.getInt('phone Number');
+    print(phoneNumber);
+    runApp(MaterialApp(home: phoneNumber == null ? ContinueWithPhone() : HomeScreen()));
+
   }
+
+  void startTimer() {
+    Timer(Duration(seconds: 3), () {
+      navigateUser();});
+    }
 }

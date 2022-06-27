@@ -1,26 +1,28 @@
 
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:milvik_project/view_model/doctor_list_vm.dart';
+import 'package:milvik_project/widgets/splash.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/doctor_details.dart';
-
 import '../../response/status.dart';
 import '../../widgets/doctor_profile_page.dart';
 import '../../widgets/error_widget.dart';
 import '../../widgets/loading_widget.dart';
+import '../details/continue_with_phone.dart';
 
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+   HomeScreen({Key? key}) : super(key: key);
+
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
   final DoctorListVM viewModel = DoctorListVM();
 
   @override
@@ -32,8 +34,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: NavigationDrawer(),
+
       backgroundColor: Colors.white,
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.black),
         title: Text(
           'BIMA DOCTOR',
           style: TextStyle(
@@ -44,13 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: Icon(
-            Icons.menu,
-            color: Colors.lightBlue.shade900,
-          ),
-          onPressed: () {},
-        ),
+
         actions: [
           Container(
             width: 110,
@@ -74,9 +73,8 @@ class _HomeScreenState extends State<HomeScreen> {
             default:
           }
           return Container();
-        }), 
+        }),
       ),
-
     );
   }
 
@@ -148,8 +146,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             firstName: doctor.first_name,
                             lastName: doctor.last_name,
                             contactNumber: doctor.primary_contact_no,
-
-
                           ),
                     ),
                   );
@@ -161,6 +157,29 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
-
 }
+
+class NavigationDrawer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+  return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          DrawerHeader(decoration: BoxDecoration(
+            color: Colors.blue.shade900,
+          ),child: Text('BIMA DOCTOR', style: TextStyle( color: Colors.white, fontSize: 20,),textAlign: TextAlign.center,),),
+          ListTile(
+            title: Text('Log Out',style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue.shade900, fontFamily: 'Roboto', fontSize: 20),),
+            onTap: () async {
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.remove('phone Number');
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ContinueWithPhone()));
+            },
+          )
+        ],
+      ),
+    );
+  }
+  }
+

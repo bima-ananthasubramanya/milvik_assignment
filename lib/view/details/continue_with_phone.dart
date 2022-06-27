@@ -1,6 +1,9 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'verify_phone.dart';
 
 class ContinueWithPhone extends StatefulWidget {
@@ -9,6 +12,7 @@ class ContinueWithPhone extends StatefulWidget {
 }
 
 class _ContinueWithPhoneState extends State<ContinueWithPhone> {
+
   var phoneNumberController = TextEditingController();
   String phoneNumber = '9986975481';
 
@@ -20,6 +24,7 @@ class _ContinueWithPhoneState extends State<ContinueWithPhone> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.lightBlue.shade900,
       body: SafeArea(
           child: Container(
         margin: EdgeInsets.all(30),
@@ -90,19 +95,21 @@ class _ContinueWithPhoneState extends State<ContinueWithPhone> {
                     ),
                     backgroundColor: MaterialStateProperty.all(Colors.teal),
                     padding: MaterialStateProperty.all(EdgeInsets.all(10))),
-                onPressed: () {
-                  if(phoneNumberController.text == phoneNumber) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            VerifyPhone(
-                              phoneNumber: phoneNumberController.text,
-                            ),
-                      ),
-                    );
-                  } else {
-                    print('Enter a valid phone Number');
+                onPressed: () async {
+                if(phoneNumberController.text == phoneNumber)  {
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                  prefs.setInt('phone Number', 9986975481);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          VerifyPhone(
+                            phoneNumber: phoneNumberController.text,
+                          ),
+                    ),
+                  );
+                } else {
+                  print('Please enter the correct Phone Number ');
                   }
                 },
                 child: Text(

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, prefer_const_constructors_in_immutables
 
 import 'package:flutter/material.dart';
+import 'package:milvik_project/widgets/splash.dart';
 import '../home_screen/home_screen_doctor_list.dart';
 import 'continue_with_phone.dart';
 
@@ -20,7 +21,6 @@ class _VerifyPhoneState extends State<VerifyPhone> {
   String otp = '123456';
   String code = '';
   bool _value = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

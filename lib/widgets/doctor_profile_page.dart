@@ -49,7 +49,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    widget.firstName! + widget.lastName!,
+                    '${widget.firstName!} ${widget.lastName!}',
                     style: TextStyle(
                       color: Colors.black,
                       fontFamily: 'Roboto',
