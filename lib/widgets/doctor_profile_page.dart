@@ -164,7 +164,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                             ),
                           ),
                         ),
-                        Container(
+                         SizedBox(
                           width: double.infinity,
                           height: 200,
                           // color: Colors.pink,

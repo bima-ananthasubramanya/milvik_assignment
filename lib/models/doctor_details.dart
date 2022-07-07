@@ -6,7 +6,7 @@ DoctorsMain doctorsMainFromJson(String str) => DoctorsMain.fromJson(json.decode(
 String doctorsMainToJson(DoctorsMain data) => json.encode(data.toJson());
 
 class DoctorsMain {
-  DoctorsMain(this.doctors,);
+  DoctorsMain(this.doctors);
 
   List<Doctor>? doctors;
 
@@ -22,7 +22,6 @@ class DoctorsMain {
             doctors!.map((x) => x.toJson())),
       };
 }
-
 
 
 class Doctor {
@@ -52,6 +51,10 @@ class Doctor {
   String? description;
   String? specialization;
   String? languagesKnown;
+
+  /// A factory constructor is a constructor that can be used when you dont necessarily want a constructor
+  /// to create new instances from a class.
+
 
   factory Doctor.fromJson(Map<String, dynamic> json) => Doctor(
     id: json["id"],

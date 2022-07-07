@@ -1,15 +1,14 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, prefer_const_constructors_in_immutables
 
 import 'package:flutter/material.dart';
-import 'package:milvik_project/widgets/splash.dart';
 import '../home_screen/home_screen_doctor_list.dart';
-import 'continue_with_phone.dart';
+
 
 
 class VerifyPhone extends StatefulWidget {
   String phoneNumber = '';
   VerifyPhone({Key? key, required String phoneNumber}) : super(key: key) {
-    print('Recieved Phone number: $phoneNumber');
+    print('Received Phone number: $phoneNumber');
     this.phoneNumber = phoneNumber;
   }
   @override
@@ -20,7 +19,7 @@ class _VerifyPhoneState extends State<VerifyPhone> {
   var otpController = TextEditingController();
   String otp = '123456';
   String code = '';
-  bool _value = false;
+  final bool _value = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,7 +108,7 @@ class _VerifyPhoneState extends State<VerifyPhone> {
               //     title: Text(
               //       'I agree to the Terms of Use and Privacy Policy',
               //       style: TextStyle(color: Colors.white, fontSize: 15),
-              //     ),
+              //      ),
               //     controlAffinity: ListTileControlAffinity.leading,
               //     activeColor: Colors.teal,
               //     checkColor: Colors.white,

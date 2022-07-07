@@ -1,7 +1,4 @@
 
-
-
-
 import 'package:milvik_project/response/status.dart';
 
 class ApiResponse<T> {

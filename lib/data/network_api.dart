@@ -1,16 +1,10 @@
 
-
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:milvik_project/data/base_api.dart';
-
 import '../models/doctor_details.dart';
-
 import 'package:http/http.dart' as http;
-
-
 import '../response/app_exception.dart';
 
 class NetworkApiService extends BaseApiService {
@@ -22,8 +16,8 @@ class NetworkApiService extends BaseApiService {
     // dynamic responseJson;
     //List<Doctor> responseJson;
     try {
-Uri input = Uri.parse(baseUrl);
-debugPrint(baseUrl);
+Uri input = Uri.parse(apiUrl);
+debugPrint(apiUrl);
       var response = await http.get(input);
       debugPrint('${response.body}');
       // var docResponse = DoctorsMain.fromJson(json.decode(response.body) as Map<String,dynamic>);
@@ -33,7 +27,9 @@ debugPrint(baseUrl);
         Doctor d = Doctor.fromJson(doctorDynamic);
         _doctors.add(d);
       }
-      print(_doctors);
+      if (kDebugMode) {
+        print(_doctors);
+      }
       return _doctors;
     } on SocketException {
       throw FetchDataException('No Internet Connection');
@@ -44,19 +40,16 @@ debugPrint(baseUrl);
   }
 
   @override
-  Future postResponse(String url, Map<String, String> jsonBody) async{
+  Future postResponse(Map<String, String> jsonBody) async{
     dynamic responseJson;
     try {
-      final response = await http.post(Uri.parse(baseUrl + url),body: jsonBody);
+      final response = await http.post(Uri.parse(apiUrl),body: jsonBody);
       responseJson = returnResponse(response);
     } on SocketException {
       throw FetchDataException('No Internet Connection');
     }
     return responseJson;
   }
-
-
-
 
   dynamic returnResponse(http.Response response) {
     switch (response.statusCode) {
@@ -74,7 +67,7 @@ debugPrint(baseUrl);
       case 500:
       default:
         throw FetchDataException(
-            'Error occured while communication with server' +
+            'Error occurred while communication with server' +
                 ' with status code : ${response.statusCode}');
     }
   }

@@ -1,11 +1,12 @@
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:milvik_project/view_model/doctor_list_vm.dart';
-import 'package:milvik_project/widgets/splash.dart';
+import 'package:milvik_project/presenter/doctor_list_presenter.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/doctor_details.dart';
+import '../../presenter/doctor_list_presenter.dart';
 import '../../response/status.dart';
 import '../../widgets/doctor_profile_page.dart';
 import '../../widgets/error_widget.dart';
@@ -14,7 +15,7 @@ import '../details/continue_with_phone.dart';
 
 
 class HomeScreen extends StatefulWidget {
-   HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
 
   @override
@@ -23,22 +24,22 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  final DoctorListVM viewModel = DoctorListVM();
+  final DoctorListPresenter presenter = DoctorListPresenter();
 
   @override
   void initState() {
-    viewModel.fetchDoctor();
+    presenter.fetchDoctor();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawer(),
+      drawer: const NavigationDrawer(),
 
       backgroundColor: Colors.white,
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
         title: Text(
           'BIMA DOCTOR',
           style: TextStyle(
@@ -51,25 +52,29 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.white,
 
         actions: [
-          Container(
+          SizedBox(
             width: 110,
             child: Image.asset('images/img_bima_logo_nav_blue_56dp.png'),
           )
         ],
       ),
-      body: ChangeNotifierProvider<DoctorListVM>(
-        create: (BuildContext context) => viewModel,
-        child: Consumer<DoctorListVM>(builder: (context, viewModel, _) {
-          switch (viewModel.doctorMain.status) {
+      body: ChangeNotifierProvider<DoctorListPresenter>(
+        create: (BuildContext context) => presenter,
+        child: Consumer<DoctorListPresenter>(builder: (context, presenter, _) {
+          switch (presenter.doctorMain.status) {
             case Status.LOADING:
               print("LOADING");
-              return LoadingWidget();
+              return const LoadingWidget();
             case Status.ERROR:
-              print("ERROR");
-              return MyErrorWidget(viewModel.doctorMain.message ?? "NA");
+              if (kDebugMode) {
+                print("ERROR");
+              }
+              return MyErrorWidget(presenter.doctorMain.message ?? "NA");
             case Status.COMPLETED:
-              print("COMPLETED");
-              return getDoctorListView(viewModel.doctorMain.data);
+              if (kDebugMode) {
+                print("COMPLETED");
+              }
+              return getDoctorListView(presenter.doctorMain.data);
             default:
           }
           return Container();
@@ -90,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget getDoctorListItem(Doctor doctor) {
     return Card(
       child: Padding(
-        padding: EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
             ListTile(
@@ -101,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   // borderRadius: BorderRadius.circular(60),
                   child: Material(
                     child: FadeInImage(
-                      placeholder: AssetImage('place_holder.png'),
+                      placeholder: const AssetImage('place_holder.png'),
                       image:
                       NetworkImage('${doctor.profile_pic}'),
                       fit: BoxFit.fill,
@@ -111,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               title: Text(
                 '${doctor.first_name}'.toUpperCase(),
-                style: TextStyle(color: Colors.blue),
+                style: const TextStyle(color: Colors.blue),
               ),
               // tileColor: Colors.lightBlue.shade900,
               subtitle: Column(
@@ -120,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text(
                     '${doctor.specialization}',
-                    style: TextStyle(color: Colors.lightBlue),
+                    style: const TextStyle(color: Colors.lightBlue),
                   ),
                   Text(
                     '${doctor.description}',
@@ -160,6 +165,8 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class NavigationDrawer extends StatelessWidget {
+  const NavigationDrawer({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
   return Drawer(
@@ -183,3 +190,5 @@ class NavigationDrawer extends StatelessWidget {
   }
   }
 
+
+  

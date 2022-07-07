@@ -1,11 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
-import 'package:milvik_project/view/home_screen/home_screen_doctor_list.dart';
 import 'package:milvik_project/widgets/splash.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import 'view/details/continue_with_phone.dart';
 
 void main() async {
   runApp(MyApp());
