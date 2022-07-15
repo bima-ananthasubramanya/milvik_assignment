@@ -12,14 +12,11 @@ class NetworkApiService extends BaseApiService {
 
   @override
   Future getDoctorDetailsFromApi() async {
-
-    // dynamic responseJson;
-    //List<Doctor> responseJson;
     try {
 Uri input = Uri.parse(apiUrl);
 debugPrint(apiUrl);
       var response = await http.get(input);
-      debugPrint('${response.body}');
+      debugPrint(response.body);
       // var docResponse = DoctorsMain.fromJson(json.decode(response.body) as Map<String,dynamic>);
       // responseJson = returnResponse(response);
       List doctorsJson = returnResponse(response) as List;
@@ -34,21 +31,9 @@ debugPrint(apiUrl);
     } on SocketException {
       throw FetchDataException('No Internet Connection');
     } catch(e){
-      debugPrint('caught error:: ${e}');
+      debugPrint('caught error:: $e');
     }
     return _doctors;
-  }
-
-  @override
-  Future postResponse(Map<String, String> jsonBody) async{
-    dynamic responseJson;
-    try {
-      final response = await http.post(Uri.parse(apiUrl),body: jsonBody);
-      responseJson = returnResponse(response);
-    } on SocketException {
-      throw FetchDataException('No Internet Connection');
-    }
-    return responseJson;
   }
 
   dynamic returnResponse(http.Response response) {

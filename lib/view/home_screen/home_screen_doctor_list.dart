@@ -2,6 +2,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:milvik_project/presenter/doctor_list_presenter.dart';
+import 'package:milvik_project/database_helper/helper.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -175,7 +176,7 @@ class NavigationDrawer extends StatelessWidget {
         children: [
           DrawerHeader(decoration: BoxDecoration(
             color: Colors.blue.shade900,
-          ),child: Text('BIMA DOCTOR', style: TextStyle( color: Colors.white, fontSize: 20,),textAlign: TextAlign.center,),),
+          ),child: const Text('BIMA DOCTOR', style: TextStyle( color: Colors.white, fontSize: 20,),textAlign: TextAlign.center,),),
           ListTile(
             title: Text('Log Out',style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue.shade900, fontFamily: 'Roboto', fontSize: 20),),
             onTap: () async {

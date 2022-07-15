@@ -84,7 +84,6 @@ class _VerifyPhoneState extends State<VerifyPhone> {
                       backgroundColor: MaterialStateProperty.all(Colors.teal),
                       padding: MaterialStateProperty.all(EdgeInsets.all(10))),
                   onPressed: () {
-
                       Navigator.push(
                         context,
                         MaterialPageRoute(
