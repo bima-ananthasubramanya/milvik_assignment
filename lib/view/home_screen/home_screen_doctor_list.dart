@@ -2,10 +2,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:milvik_project/presenter/doctor_list_presenter.dart';
-import 'package:milvik_project/database_helper/helper.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../models/doctor_details.dart';
 import '../../presenter/doctor_list_presenter.dart';
 import '../../response/status.dart';
@@ -14,17 +12,14 @@ import '../../widgets/error_widget.dart';
 import '../../widgets/loading_widget.dart';
 import '../details/continue_with_phone.dart';
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
-
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   final DoctorListPresenter presenter = DoctorListPresenter();
 
   @override
@@ -37,7 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const NavigationDrawer(),
-
       backgroundColor: Colors.white,
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black),
@@ -51,7 +45,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         backgroundColor: Colors.white,
-
         actions: [
           SizedBox(
             width: 110,
@@ -84,16 +77,16 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget  getDoctorListView(List<Doctor>? doctorsList) {
+  Widget getDoctorListView(List<Doctor>? doctorsList) {
     return ListView.builder(
-      itemCount: doctorsList?.length,
-      itemBuilder: (context, position) {
-        return getDoctorListItem(doctorsList![position]);
-      },
-    );
+        itemCount: doctorsList?.length,
+        itemBuilder: (context, position) {
+          return getDoctorListItem(doctorsList![position], context);
+          // doctorsList?.length,
+        });
   }
 
-  Widget getDoctorListItem(Doctor doctor) {
+  Widget getDoctorListItem(Doctor doctor,  context) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -108,8 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Material(
                     child: FadeInImage(
                       placeholder: const AssetImage('place_holder.png'),
-                      image:
-                      NetworkImage('${doctor.profile_pic}'),
+                      image: NetworkImage('${doctor.profile_pic}'),
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -147,12 +139,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          DoctorProfile(
-                            firstName: doctor.first_name,
-                            lastName: doctor.last_name,
-                            contactNumber: doctor.primary_contact_no,
-                          ),
+                      builder: (context) => DoctorProfile(
+                        firstName: doctor.first_name,
+                        lastName: doctor.last_name,
+                        contactNumber: doctor.primary_contact_no,
+                      ),
                     ),
                   );
                 },
@@ -170,26 +161,41 @@ class NavigationDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  return Drawer(
+    return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          DrawerHeader(decoration: BoxDecoration(
-            color: Colors.blue.shade900,
-          ),child: const Text('BIMA DOCTOR', style: TextStyle( color: Colors.white, fontSize: 20,),textAlign: TextAlign.center,),),
+          DrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.blue.shade900,
+            ),
+            child: const Text(
+              'BIMA DOCTOR',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
           ListTile(
-            title: Text('Log Out',style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue.shade900, fontFamily: 'Roboto', fontSize: 20),),
+            title: Text(
+              'Log Out',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue.shade900,
+                  fontFamily: 'Roboto',
+                  fontSize: 20),
+            ),
             onTap: () async {
               SharedPreferences prefs = await SharedPreferences.getInstance();
               prefs.remove('phone Number');
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ContinueWithPhone()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ContinueWithPhone()));
             },
           )
         ],
       ),
     );
   }
-  }
-
-
-  
+}

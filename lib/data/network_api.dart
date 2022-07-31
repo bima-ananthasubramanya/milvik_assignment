@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
@@ -11,14 +10,11 @@ class NetworkApiService extends BaseApiService {
   final List<Doctor> _doctors = [];
 
   @override
-  Future getDoctorDetailsFromApi() async {
-    try {
-Uri input = Uri.parse(apiUrl);
-debugPrint(apiUrl);
+  Future<List<Doctor>> getDoctorDetailsFromApi() async {
+      Uri input = Uri.parse(apiUrl);
+      debugPrint(apiUrl);
       var response = await http.get(input);
-      debugPrint(response.body);
-      // var docResponse = DoctorsMain.fromJson(json.decode(response.body) as Map<String,dynamic>);
-      // responseJson = returnResponse(response);
+      // debugPrint(response.body);
       List doctorsJson = returnResponse(response) as List;
       for (var doctorDynamic in doctorsJson) {
         Doctor d = Doctor.fromJson(doctorDynamic);
@@ -28,12 +24,7 @@ debugPrint(apiUrl);
         print(_doctors);
       }
       return _doctors;
-    } on SocketException {
-      throw FetchDataException('No Internet Connection');
-    } catch(e){
-      debugPrint('caught error:: $e');
     }
-    return _doctors;
   }
 
   dynamic returnResponse(http.Response response) {
@@ -57,38 +48,24 @@ debugPrint(apiUrl);
     }
   }
 
+// Uri doctorDetails = Uri.parse(newURL);
+// var response = await http.get(doctorDetails);
+// print(response.body);
+// List<Doctor> doctors = [];
+//
+// if (response.statusCode == 200) {
+//   List doctorsJson = jsonDecode(response.body) as List;
+//   for (var doctorDynamic in doctorsJson) {
+//     Doctor d = Doctor.fromJson(doctorDynamic);
+//     doctors.add(d);
+//   }
+//   print(doctors);
+// }
+// return doctors;
 
 
 
-
-    // Uri doctorDetails = Uri.parse(newURL);
-    // var response = await http.get(doctorDetails);
-    // print(response.body);
-    // List<Doctor> doctors = [];
-    //
-    // if (response.statusCode == 200) {
-    //   List doctorsJson = jsonDecode(response.body) as List;
-    //   for (var doctorDynamic in doctorsJson) {
-    //     Doctor d = Doctor.fromJson(doctorDynamic);
-    //     doctors.add(d);
-    //   }
-    //   print(doctors);
-    // }
-    // return doctors;
-
-
-
-  }
-
-
-
-
-
-
-    // Uri doctorDetails = Uri.parse(newURL);
-    // var getDoctorDetails = await http.get(doctorDetails);
-    // var toJSon = jsonDecode(getDoctorDetails.body) as List;
-    // return toJSon;
-
-
-
+// Uri doctorDetails = Uri.parse(newURL);
+// var getDoctorDetails = await http.get(doctorDetails);
+// var toJSon = jsonDecode(getDoctorDetails.body) as List;
+// return toJSon;
