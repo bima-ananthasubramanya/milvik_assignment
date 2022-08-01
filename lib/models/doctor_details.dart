@@ -37,7 +37,6 @@ class Doctor {
   String? first_name;
   String? last_name;
   String? profile_pic;
-  //bool? favorite;
   String? primary_contact_no;
   double? rating;
   String? email_address;
@@ -66,7 +65,7 @@ class Doctor {
 
   // List<Doctor>? get doctors => doctors;
 
-  /// this method takes an object and converts it into an map as key value pair.
+  // this method takes an object and converts it into an map as key value pair.
 
     Map<String,dynamic> toJson() => {
       'id': id,

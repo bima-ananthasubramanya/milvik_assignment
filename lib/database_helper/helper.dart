@@ -1,10 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:milvik_project/models/doctor_details.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class DBHelper {
   static Future<Database> initDB() async {
-    // WidgetsFlutterBinding.ensureInitialized();
+    WidgetsFlutterBinding.ensureInitialized();
     var dbPath = await getDatabasesPath();
     var path = join(dbPath, 'doctor_details.db');
     return await openDatabase(path, version: 1, onCreate: _onCreate);

@@ -20,12 +20,13 @@ class DoctorRepoImp implements DoctorRepo {
 
     List<Doctor> doctorList = [];
 
+
     // Check if network is available
     final networkStatus = await NetworkService().isConnected();
     print("Network Status : $networkStatus");
 
     // If network is available, fetch list of doctors from apiService and update DB
-    if (networkStatus == false) {
+    if (networkStatus == true) {
       doctorList = await apiService.getDoctorDetailsFromApi();
       print("Inserting data into DB -");
 
