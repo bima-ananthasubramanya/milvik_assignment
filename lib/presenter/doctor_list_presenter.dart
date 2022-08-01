@@ -1,12 +1,12 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:milvik_project/database_helper/helper.dart';
 import 'package:milvik_project/response/api_response.dart';
 
 import '../data/base_api.dart';
 import '../data/network_api.dart';
 import '../models/doctor_details.dart';
-import '../service/network_service.dart';
 
 class DoctorRepo {
   Future<List<Doctor>?> getDoctorList() async {}
@@ -19,14 +19,15 @@ class DoctorRepoImp implements DoctorRepo {
   Future<List<Doctor>?> getDoctorList() async {
 
     List<Doctor> doctorList = [];
+    bool hasInternet = false;
 
 
     // Check if network is available
-    final networkStatus = await NetworkService().isConnected();
-    print("Network Status : $networkStatus");
+    hasInternet = await InternetConnectionChecker().hasConnection;
+    print("Network Status : $hasInternet");
 
     // If network is available, fetch list of doctors from apiService and update DB
-    if (networkStatus == true) {
+    if (hasInternet == true) {
       doctorList = await apiService.getDoctorDetailsFromApi();
       print("Inserting data into DB -");
 
