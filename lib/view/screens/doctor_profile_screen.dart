@@ -1,13 +1,12 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 
 import 'package:flutter/material.dart';
-import '../models/doctor_details.dart';
 
-class DoctorProfile extends StatefulWidget {
-  String? firstName;
-  String? lastName;
-  String? contactNumber;
-  DoctorProfile(
+class DoctorProfileScreen extends StatefulWidget {
+  final String? firstName;
+  final String? lastName;
+  final String? contactNumber;
+  const DoctorProfileScreen(
       {Key? key,
       required this.firstName,
       required this.lastName,
@@ -15,10 +14,10 @@ class DoctorProfile extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<DoctorProfile> createState() => _DoctorProfileState();
+  State<DoctorProfileScreen> createState() => _DoctorProfileScreenState();
 }
 
-class _DoctorProfileState extends State<DoctorProfile> {
+class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
@@ -32,7 +31,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.yellow,
           ),
@@ -50,7 +49,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                 children: [
                   Text(
                     '${widget.firstName!} ${widget.lastName!}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                       fontFamily: 'Roboto',
                       fontWeight: FontWeight.bold,
@@ -71,9 +70,9 @@ class _DoctorProfileState extends State<DoctorProfile> {
                             ),
                           ),
                           backgroundColor: MaterialStateProperty.all(Colors.teal),
-                          padding: MaterialStateProperty.all(EdgeInsets.all(10))),
+                          padding: MaterialStateProperty.all(const EdgeInsets.all(10))),
                       onPressed: () {},
-                      child: Text(
+                      child: const Text(
                         'Edit Profile',
                         style: TextStyle(
                           color: Colors.white,
@@ -92,7 +91,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       // crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'PERSONAL DETAILS',
                           style: TextStyle(
                               fontSize: 20,
@@ -109,7 +108,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                             ),
                             subtitle: Text(
                               widget.firstName!,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
                                   fontSize: 18),
@@ -121,11 +120,11 @@ class _DoctorProfileState extends State<DoctorProfile> {
                           child: ListTile(
                             title: Text(
                               'Last Name'.toUpperCase(),
-                              style: TextStyle(color: Colors.grey),
+                              style: const TextStyle(color: Colors.grey),
                             ),
                             subtitle: Text(
                               widget.lastName!,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
                                   fontSize: 18),
@@ -137,9 +136,9 @@ class _DoctorProfileState extends State<DoctorProfile> {
                           child: ListTile(
                             title: Text(
                               'Gender'.toUpperCase(),
-                              style: TextStyle(color: Colors.grey),
+                              style: const TextStyle(color: Colors.grey),
                             ),
-                            subtitle: Text(
+                            subtitle: const Text(
                               'M/F',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -153,11 +152,11 @@ class _DoctorProfileState extends State<DoctorProfile> {
                           child: ListTile(
                             title: Text(
                               'Contact Number'.toUpperCase(),
-                              style: TextStyle(color: Colors.grey),
+                              style: const TextStyle(color: Colors.grey),
                             ),
                             subtitle: Text(
                               widget.contactNumber!,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
                                   fontSize: 18),
@@ -173,10 +172,10 @@ class _DoctorProfileState extends State<DoctorProfile> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Container(
-                                margin: EdgeInsets.symmetric(horizontal: 10),
+                                margin: const EdgeInsets.symmetric(horizontal: 10),
                                 child: Text(
                                   'Date of Birth'.toUpperCase(),
-                                  style: TextStyle(color: Colors.grey),
+                                  style: const TextStyle(color: Colors.grey),
                                 ),
                               ),
                               Row(
@@ -196,7 +195,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                                     width: 90,
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
+                                      children: const [
                                         Text('Day'),
                                         Text(
                                           'day',
@@ -220,7 +219,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
 
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
+                                      children: const [
                                         Text('Month'),
                                         Text(
                                           'month',
@@ -243,7 +242,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                                     width: 90,
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
+                                      children: const [
                                         Text('Year'),
                                         Text(
                                           'year',

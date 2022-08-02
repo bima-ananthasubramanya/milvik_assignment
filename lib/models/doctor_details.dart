@@ -1,23 +1,3 @@
- import 'dart:convert';
-
-class DoctorsMain {
-  DoctorsMain(this.doctors);
-
-  List<Doctor>? doctors;
-
-  factory DoctorsMain.fromJson(Map<String, dynamic> json) =>
-      DoctorsMain(
-        json["doctors"] == null ? null : List<Doctor>.from(
-            json["Doctor"].map((x) => Doctor.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() =>
-      {
-        "doctors": doctors == null ? null : List<dynamic>.from(
-            doctors!.map((x) => x.toJson())),
-      };
-}
-
 
 class Doctor {
   Doctor({
@@ -45,10 +25,10 @@ class Doctor {
   String? specialization;
   String? languagesKnown;
 
-  /// A factory constructor is a constructor that can be used when you dont necessarily want a constructor
+  /// A factory constructor is a constructor that can be used when you don't necessarily want a constructor
   /// to create new instances from a class.
-
   /// This method takes a Map(json)and transforms into an object of type Employee
+
   factory Doctor.fromJson(Map<String, dynamic> json) => Doctor(
     id: json["id"],
     first_name: json["first_name"],
@@ -63,9 +43,19 @@ class Doctor {
     languagesKnown:json["languagesKnown"],
   );
 
-  // List<Doctor>? get doctors => doctors;
-
-  // this method takes an object and converts it into an map as key value pair.
+  factory Doctor.fromDB(Map<String, dynamic> json) => Doctor(
+    id: json["id"],
+    first_name: json["firstName"],
+    last_name:json["lastName"],
+    profile_pic:json["profilePic"],
+    primary_contact_no:json["primaryContactNo"],
+    rating:double.parse(json["rating"]),
+    email_address:json["emailAddress"],
+    qualification:json["qualification"],
+    description:json["description"],
+    specialization:json["specialization"],
+    languagesKnown:json["languagesKnown"],
+  );
 
     Map<String,dynamic> toJson() => {
       'id': id,

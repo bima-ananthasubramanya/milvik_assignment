@@ -1,31 +1,27 @@
 
 
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../view/details/continue_with_phone.dart';
-import '../view/home_screen/home_screen_doctor_list.dart';
-
-class Splash extends StatefulWidget  {
+import 'enter_phoneNumber_screen.dart';
+import 'home_screen_doctor_list.dart';
 
 
 
-  const Splash({Key? key}) : super(key: key);
-
+class SplashScreen extends StatefulWidget  {
+  const SplashScreen({Key? key}) : super(key: key);
   @override
-  State<Splash> createState() => _SplashState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashState extends State<Splash> {
+class _SplashScreenState extends State<SplashScreen> {
+  @override
   void initState(){
     super.initState();
     startTimer();
 
   }
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,12 +39,12 @@ class _SplashState extends State<Splash> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var phoneNumber = prefs.getInt('phone Number');
     print(phoneNumber);
-    runApp(MaterialApp(home: phoneNumber == null ? ContinueWithPhone() : HomeScreen()));
+    runApp(MaterialApp(home: phoneNumber == null ? ContinueWithPhone() : const HomeScreen()));
 
   }
 
   void startTimer() {
-    Timer(Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 3), () {
       navigateUser();});
     }
 }

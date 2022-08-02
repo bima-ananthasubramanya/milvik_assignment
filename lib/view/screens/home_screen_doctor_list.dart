@@ -1,4 +1,5 @@
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:milvik_project/presenter/doctor_list_presenter.dart';
@@ -7,10 +8,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../models/doctor_details.dart';
 import '../../presenter/doctor_list_presenter.dart';
 import '../../response/status.dart';
-import '../../widgets/doctor_profile_page.dart';
-import '../../widgets/error_widget.dart';
-import '../../widgets/loading_widget.dart';
-import '../details/continue_with_phone.dart';
+import '../widgets/loading_widget.dart';
+import '../widgets/error_widget.dart';
+import 'enter_phoneNumber_screen.dart';
+import 'doctor_profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -77,16 +78,16 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget getDoctorListView(List<Doctor>? doctorsList) {
+   getDoctorListView(List<Doctor>? doctorsList)  {
     return ListView.builder(
         itemCount: doctorsList?.length,
-        itemBuilder: (context, position) {
-          return getDoctorListItem(doctorsList![position], context);
+        itemBuilder: (context, position)  {
+          return   getDoctorListItem(doctorsList![position], context);
           // doctorsList?.length,
         });
   }
 
-  Widget getDoctorListItem(Doctor doctor,  context) {
+  Widget getDoctorListItem(Doctor doctor,  context)  {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -101,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Material(
                     child: FadeInImage(
                       placeholder: const AssetImage('place_holder.png'),
-                      image: NetworkImage('${doctor.profile_pic}'),
+                      image: CachedNetworkImageProvider('${doctor.profile_pic}'),
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -139,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => DoctorProfile(
+                      builder: (context) => DoctorProfileScreen(
                         firstName: doctor.first_name,
                         lastName: doctor.last_name,
                         contactNumber: doctor.primary_contact_no,
@@ -191,7 +192,7 @@ class NavigationDrawer extends StatelessWidget {
               SharedPreferences prefs = await SharedPreferences.getInstance();
               prefs.remove('phone Number');
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ContinueWithPhone()));
+                  MaterialPageRoute(builder: (context) => const ContinueWithPhone()));
             },
           )
         ],

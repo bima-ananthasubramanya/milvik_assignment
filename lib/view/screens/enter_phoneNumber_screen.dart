@@ -4,9 +4,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'verify_phone.dart';
+import 'validate_otp_screen.dart';
 
 class ContinueWithPhone extends StatefulWidget {
+  const ContinueWithPhone({Key? key}) : super(key: key);
+
   @override
   State<ContinueWithPhone> createState() => _ContinueWithPhoneState();
 }

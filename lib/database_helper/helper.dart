@@ -30,7 +30,7 @@ class DBHelper {
 
   static Future<int> createDoctors(Doctor doctor) async {
     Database db = await DBHelper.initDB();
-    return await db.insert('doctor_details', doctor.toJson(),
+    return await db.insert('doctor_details ESCAPE _', doctor.toJson(),
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
@@ -48,7 +48,7 @@ class DBHelper {
     Database db = await DBHelper.initDB();
     var listOfDoctors = await db.query('doctor_details', orderBy: 'firstName');
     List<Doctor> doctorList = listOfDoctors.isNotEmpty
-        ? listOfDoctors.map((details) => Doctor.fromJson(details)).toList()
+        ? listOfDoctors.map((details) => Doctor.fromDB(details)).toList()
         : [];
     return doctorList;
   }

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:milvik_project/data/base_api.dart';
 import '../models/doctor_details.dart';
@@ -14,7 +13,6 @@ class NetworkApiService extends BaseApiService {
       Uri input = Uri.parse(apiUrl);
       debugPrint(apiUrl);
       var response = await http.get(input);
-      // debugPrint(response.body);
       List doctorsJson = returnResponse(response) as List;
       for (var doctorDynamic in doctorsJson) {
         Doctor d = Doctor.fromJson(doctorDynamic);
@@ -48,24 +46,3 @@ class NetworkApiService extends BaseApiService {
     }
   }
 
-// Uri doctorDetails = Uri.parse(newURL);
-// var response = await http.get(doctorDetails);
-// print(response.body);
-// List<Doctor> doctors = [];
-//
-// if (response.statusCode == 200) {
-//   List doctorsJson = jsonDecode(response.body) as List;
-//   for (var doctorDynamic in doctorsJson) {
-//     Doctor d = Doctor.fromJson(doctorDynamic);
-//     doctors.add(d);
-//   }
-//   print(doctors);
-// }
-// return doctors;
-
-
-
-// Uri doctorDetails = Uri.parse(newURL);
-// var getDoctorDetails = await http.get(doctorDetails);
-// var toJSon = jsonDecode(getDoctorDetails.body) as List;
-// return toJSon;
