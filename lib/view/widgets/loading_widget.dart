@@ -7,16 +7,16 @@ class LoadingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            CircularProgressIndicator(),
-            SizedBox(
-              height: 8,
-            ),
-            Text(
-              'Loading...',
-            )
-          ],
-        ));
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: const [
+        CircularProgressIndicator(),
+        SizedBox(
+          height: 8,
+        ),
+        Text(
+          'Loading...',
+        )
+      ],
+    ));
   }
 }

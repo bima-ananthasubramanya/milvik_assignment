@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "56696023327",
+    "project_id": "milvik-assignment",
+    "storage_bucket": "milvik-assignment.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56696023327:android:db7302646e5d17ce74682a",
+        "android_client_info": {
+          "package_name": "com.example.milvik_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "56696023327-s71ksmvaogg1ovd0q32l1h399oamf20c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.milvik_project",
+            "certificate_hash": "bcc19324cde19f965b222d3a21a0a3c79f688133"
+          }
+        },
+        {
+          "client_id": "56696023327-ovr1t9d5csslla68hevs0vgseb3ooj14.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbAmza9d0KljsC4byMOQRxjc2m3ilHRsQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "56696023327-ovr1t9d5csslla68hevs0vgseb3ooj14.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "56696023327-bl3uj5enqr1jshgan3qjp230ka25apsa.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.milvikProject"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

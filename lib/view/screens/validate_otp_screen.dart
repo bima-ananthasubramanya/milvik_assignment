@@ -1,25 +1,32 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, prefer_const_constructors_in_immutables
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:milvik_project/cubit/auth_cubit.dart';
+
 import 'home_screen_doctor_list.dart';
 
-
-
-class VerifyPhone extends StatefulWidget {
+class EnterOtp extends StatefulWidget {
   String phoneNumber = '';
-  VerifyPhone({Key? key, required String phoneNumber}) : super(key: key) {
-    print('Received Phone number: $phoneNumber');
+
+  EnterOtp({
+    Key? key,
+    required String phoneNumber,
+  }) : super(key: key) {
+    if (kDebugMode) {
+      print('Received Phone number: $phoneNumber');
+    }
     this.phoneNumber = phoneNumber;
   }
+
   @override
-  State<VerifyPhone> createState() => _VerifyPhoneState();
+  State<EnterOtp> createState() => _EnterOtpState();
 }
 
-class _VerifyPhoneState extends State<VerifyPhone> {
+class _EnterOtpState extends State<EnterOtp> {
   var otpController = TextEditingController();
-  String otp = '123456';
-  String code = '';
-  final bool _value = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,10 +38,11 @@ class _VerifyPhoneState extends State<VerifyPhone> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Container(
+              SizedBox(
                 // color: Colors.teal,
                 height: 150,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
                       'Enter Verification Code',
@@ -44,79 +52,92 @@ class _VerifyPhoneState extends State<VerifyPhone> {
                           fontFamily: 'Roboto',
                           fontWeight: FontWeight.bold),
                     ),
-                    Expanded(
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          textFieldOTP(first: true, last: false),
-                          textFieldOTP(first: false, last: false),
-                          textFieldOTP(first: false, last: false),
-                          textFieldOTP(first: false, last: false),
-                          textFieldOTP(first: false, last: false),
-                          textFieldOTP(first: false, last: true),
-                        ],
+                    SizedBox(
+                      width: 300,
+                      child: TextFormField(
+                        cursorColor: Colors.yellow,
+                        style: TextStyle(
+                          color: Colors.yellow,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        controller: otpController,
+                        decoration: InputDecoration(
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          fillColor: Colors.white,
+                        ),
                       ),
                     ),
-                    Text(
-                      'Please enter the verification code that was sent to ${widget.phoneNumber}',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'RobotoCondensed',
+                    SizedBox(
+                      width: 300,
+                      child: Text(
+                        'Please enter the verification code that was sent to ${widget.phoneNumber}',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'RobotoCondensed',
+                        ),
                       ),
                     )
                   ],
                 ),
               ),
-              SizedBox(
-                width: double.infinity,
-                // padding: EdgeInsets.all(value),
-                // decoration:
-                //     BoxDecoration(borderRadius: BorderRadius.circular(30)),
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(7),
-                          // side: BorderSide(color: Colors.yellow),
+              BlocConsumer<AuthCubit, AuthState>(
+                listener: (context, state) {
+                  if (state is AuthLoggedInState) {
+                    Navigator.popUntil(context, (route) => route.isFirst);
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()));
+                  } else if (state is AuthErrorState) {
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(SnackBar(content: Text(state.error)));
+                  }
+                },
+                builder: (context, state) {
+                  if (state is AuthLoadingState) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return SizedBox(
+                    width: double.infinity,
+                    // padding: EdgeInsets.all(value),
+                    // decoration:
+                    //     BoxDecoration(borderRadius: BorderRadius.circular(30)),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(7),
+                              // side: BorderSide(color: Colors.yellow),
+                            ),
+                          ),
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.teal),
+                          padding:
+                              MaterialStateProperty.all(EdgeInsets.all(10))),
+                      onPressed: () {
+                        BlocProvider.of<AuthCubit>(context)
+                            .verifyOTP(otpController.text);
+                      },
+                      child: Text(
+                        'Login',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          // fontFamily: 'RobotoCondensed'
                         ),
                       ),
-                      backgroundColor: MaterialStateProperty.all(Colors.teal),
-                      padding: MaterialStateProperty.all(EdgeInsets.all(10))),
-                  onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomeScreen(),
-                        ),
-                      );
-                    } ,
-
-                  child: Text(
-                    'Login',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      // fontFamily: 'RobotoCondensed'
                     ),
-                  ),
-                ),
+                  );
+                },
               ),
               // CheckboxListTile(
-              //     title: Text(
-              //       'I agree to the Terms of Use and Privacy Policy',
-              //       style: TextStyle(color: Colors.white, fontSize: 15),
-              //      ),
-              //     controlAffinity: ListTileControlAffinity.leading,
-              //     activeColor: Colors.teal,
-              //     checkColor: Colors.white,
-              //     value: _value,
-              //     onChanged: (bool? value) {
-              //       setState(() {
-              //         _value = value!;
-              //       });
-              //     })
             ],
           ),
         ),
@@ -140,7 +161,6 @@ class _VerifyPhoneState extends State<VerifyPhone> {
               FocusScope.of(context).previousFocus();
             }
           },
-
           showCursor: false,
           readOnly: false,
           textAlign: TextAlign.center,

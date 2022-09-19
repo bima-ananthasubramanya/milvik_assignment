@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +5,6 @@ import 'package:milvik_project/presenter/doctor_list_presenter.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../models/doctor_details.dart';
-import '../../presenter/doctor_list_presenter.dart';
 import '../../response/status.dart';
 import '../widgets/loading_widget.dart';
 import '../widgets/error_widget.dart';
@@ -54,8 +52,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: ChangeNotifierProvider<DoctorListPresenter>(
+        // use  blocBuilder here
         create: (BuildContext context) => presenter,
         child: Consumer<DoctorListPresenter>(builder: (context, presenter, _) {
+          // bloc listner
           switch (presenter.doctorMain.status) {
             case Status.LOADING:
               print("LOADING");
@@ -78,16 +78,16 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-   getDoctorListView(List<Doctor>? doctorsList)  {
+  getDoctorListView(List<Doctor>? doctorsList) {
     return ListView.builder(
         itemCount: doctorsList?.length,
-        itemBuilder: (context, position)  {
-          return   getDoctorListItem(doctorsList![position], context);
+        itemBuilder: (context, position) {
+          return getDoctorListItem(doctorsList![position], context);
           // doctorsList?.length,
         });
   }
 
-  Widget getDoctorListItem(Doctor doctor,  context)  {
+  Widget getDoctorListItem(Doctor doctor, context) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -102,7 +102,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Material(
                     child: FadeInImage(
                       placeholder: const AssetImage('place_holder.png'),
-                      image: CachedNetworkImageProvider('${doctor.profile_pic}'),
+                      image:
+                          CachedNetworkImageProvider('${doctor.profile_pic}'),
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -192,7 +193,7 @@ class NavigationDrawer extends StatelessWidget {
               SharedPreferences prefs = await SharedPreferences.getInstance();
               prefs.remove('phone Number');
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const ContinueWithPhone()));
+                  MaterialPageRoute(builder: (context) => EnterPhoneNumber()));
             },
           )
         ],

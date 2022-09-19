@@ -1,13 +1,11 @@
-
 import 'package:milvik_project/response/status.dart';
 
 class ApiResponse<T> {
-
   Status? status;
   T? data;
   String? message;
 
-  ApiResponse(this.status,this.data,this.message);
+  ApiResponse(this.status, this.data, this.message);
 
   ApiResponse.loading() : status = Status.LOADING;
 
@@ -15,8 +13,8 @@ class ApiResponse<T> {
 
   ApiResponse.error(this.message) : status = Status.ERROR;
 
-  // @override
-  // String toString() {
-  //   return "Status : $status \n Message : $message \n Data : $data";
-  // }
+// @override
+// String toString() {
+//   return "Status : $status \n Message : $message \n Data : $data";
+// }
 }

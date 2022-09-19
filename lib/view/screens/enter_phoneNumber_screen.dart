@@ -1,27 +1,18 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'dart:ui';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../cubit/auth_cubit.dart';
 import 'validate_otp_screen.dart';
 
-class ContinueWithPhone extends StatefulWidget {
-  const ContinueWithPhone({Key? key}) : super(key: key);
-
-  @override
-  State<ContinueWithPhone> createState() => _ContinueWithPhoneState();
-}
-
-class _ContinueWithPhoneState extends State<ContinueWithPhone> {
+class EnterPhoneNumber extends StatelessWidget {
+  EnterPhoneNumber({Key? key}) : super(key: key);
 
   var phoneNumberController = TextEditingController();
-  String phoneNumber = '9986975481';
 
-
-  // void submitData() {
-  //   final enteredPhoneNumber = phoneNumberController.text;
-  // }
+  String phoneNumber = '+919986975481';
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +46,6 @@ class _ContinueWithPhoneState extends State<ContinueWithPhone> {
                       fontWeight: FontWeight.bold,
                     ),
                     controller: phoneNumberController,
-                    // onSubmitted: (_) => submitData(),
-                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),
@@ -65,6 +54,13 @@ class _ContinueWithPhoneState extends State<ContinueWithPhone> {
                         borderSide: BorderSide(color: Colors.white),
                       ),
                       fillColor: Colors.white,
+                      // prefix: Padding(
+                      //   padding: EdgeInsets.all(4),
+                      //   child: Text(
+                      //     '+91',
+                      //     style: TextStyle(color: Colors.yellow),
+                      //   ),
+                      // ),
                       suffixIcon: IconButton(
                         onPressed: phoneNumberController.clear,
                         icon: Icon(
@@ -82,48 +78,63 @@ class _ContinueWithPhoneState extends State<ContinueWithPhone> {
                 ],
               ),
             ),
-            SizedBox(
-              width: double.infinity,
-              // padding: EdgeInsets.all(value),
-              // decoration:
-              //     BoxDecoration(borderRadius: BorderRadius.circular(30)),
-              child: ElevatedButton(
-                style: ButtonStyle(
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(7),
-                        // side: BorderSide(color: Colors.yellow),
+            BlocConsumer<AuthCubit, AuthState>(
+              listener: (context, state) {
+                if (state is AuthCodeSentState) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              EnterOtp(phoneNumber: phoneNumber)));
+                }
+              },
+              builder: (context, state) {
+                if (state is AuthLoadingState) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                return SizedBox(
+                  width: double.infinity,
+                  // padding: EdgeInsets.all(value),
+                  // decoration:
+                  //     BoxDecoration(borderRadius: BorderRadius.circular(30)),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(7),
+                            // side: BorderSide(color: Colors.yellow),
+                          ),
+                        ),
+                        backgroundColor: MaterialStateProperty.all(Colors.teal),
+                        padding: MaterialStateProperty.all(EdgeInsets.all(10))),
+                    onPressed: () async {
+                      if (phoneNumberController.text == phoneNumber) {
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        prefs.setInt('phone Number',
+                            int.parse(phoneNumberController.text));
+                        BlocProvider.of<AuthCubit>(context)
+                            .sendOTP(phoneNumber);
+                      } else {
+                        if (kDebugMode) {
+                          print('Please enter the correct Phone Number ');
+                        }
+                      }
+                    },
+                    child: Text(
+                      'Send OTP',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        // fontFamily: 'RobotoCondensed'
                       ),
                     ),
-                    backgroundColor: MaterialStateProperty.all(Colors.teal),
-                    padding: MaterialStateProperty.all(EdgeInsets.all(10))),
-                onPressed: () async {
-                if(phoneNumberController.text == phoneNumber)  {
-                  SharedPreferences prefs = await SharedPreferences.getInstance();
-                  prefs.setInt('phone Number', 9986975481);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          VerifyPhone(
-                            phoneNumber: phoneNumberController.text,
-                          ),
-                    ),
-                  );
-                } else {
-                  print('Please enter the correct Phone Number ');
-                  }
-                },
-                child: Text(
-                  'Continue',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    // fontFamily: 'RobotoCondensed'
                   ),
-                ),
-              ),
+                );
+              },
             )
           ],
         ),

@@ -1,11 +1,10 @@
-
-
 import 'package:flutter/material.dart';
 
 class DoctorProfileScreen extends StatefulWidget {
   final String? firstName;
   final String? lastName;
   final String? contactNumber;
+
   const DoctorProfileScreen(
       {Key? key,
       required this.firstName,
@@ -69,8 +68,10 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                               // side: BorderSide(color: Colors.yellow),
                             ),
                           ),
-                          backgroundColor: MaterialStateProperty.all(Colors.teal),
-                          padding: MaterialStateProperty.all(const EdgeInsets.all(10))),
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.teal),
+                          padding: MaterialStateProperty.all(
+                              const EdgeInsets.all(10))),
                       onPressed: () {},
                       child: const Text(
                         'Edit Profile',
@@ -163,7 +164,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                             ),
                           ),
                         ),
-                         SizedBox(
+                        SizedBox(
                           width: double.infinity,
                           height: 200,
                           // color: Colors.pink,
@@ -172,7 +173,8 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Container(
-                                margin: const EdgeInsets.symmetric(horizontal: 10),
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 10),
                                 child: Text(
                                   'Date of Birth'.toUpperCase(),
                                   style: const TextStyle(color: Colors.grey),
@@ -180,7 +182,8 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                               ),
                               Row(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Container(
                                     decoration: BoxDecoration(
@@ -194,7 +197,8 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                     height: 80,
                                     width: 90,
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: const [
                                         Text('Day'),
                                         Text(
@@ -218,7 +222,8 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                     width: 90,
 
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: const [
                                         Text('Month'),
                                         Text(
@@ -241,7 +246,8 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                     height: 80,
                                     width: 90,
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: const [
                                         Text('Year'),
                                         Text(
@@ -257,7 +263,8 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                               ),
                               Row(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Container(
                                     decoration: BoxDecoration(
@@ -270,7 +277,8 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                     height: 80,
                                     width: 90,
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Text('Blood Group'.toUpperCase()),
                                       ],
@@ -287,7 +295,8 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                     height: 80,
                                     width: 90,
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Text('Height'.toUpperCase()),
                                       ],
@@ -304,7 +313,8 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                     height: 80,
                                     width: 90,
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Text('Weight'.toUpperCase()),
                                       ],
